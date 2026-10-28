@@ -76,7 +76,7 @@ export const updateApplicationStatus = async (req, res) => {
             const application = await Application.findByIdAndUpdate(
                 id,
                 { status },
-                { new: true, runValidators: true }
+                { returnDocument: "after", runValidators: true }
             );
 
             if (!application) {

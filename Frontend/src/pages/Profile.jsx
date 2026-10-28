@@ -178,6 +178,8 @@ const Profile = () => {
                         validationSchema={ProfileSchema}
                         onSubmit={async (values, { setSubmitting }) => {
                             try {
+                                console.log("Logged in user:", user);
+                                console.log("User ID:", user?._id);
                                 const res = await axios.put(
                                     `http://localhost:3000/api3/updateprofile/${user._id}`,
                                     {
@@ -417,7 +419,7 @@ const Profile = () => {
                                     )}
                                 </div>
 
-                               
+
                                 <div className="bg-blue-50/70 border border-blue-100 rounded-2xl p-5">
                                     <p className="text-sm font-medium text-blue-600 mb-1">
                                         Role
@@ -428,7 +430,7 @@ const Profile = () => {
                                     </p>
                                 </div>
 
-                                
+
                                 {isEditing && (
                                     <button
                                         type="submit"
@@ -444,7 +446,7 @@ const Profile = () => {
                         )}
                     </Formik>
 
-                    
+
                     <div className="mt-10 pt-8 border-t border-blue-100">
                         <div className="mb-5">
                             <h2 className="text-xl font-bold text-gray-800">
@@ -490,10 +492,10 @@ const Profile = () => {
                                             <div>
                                                 <span
                                                     className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${application.status === "Shortlisted"
-                                                            ? "bg-green-100 text-green-700"
-                                                            : application.status === "Rejected"
-                                                                ? "bg-red-100 text-red-700"
-                                                                : "bg-yellow-100 text-yellow-700"
+                                                        ? "bg-green-100 text-green-700"
+                                                        : application.status === "Rejected"
+                                                            ? "bg-red-100 text-red-700"
+                                                            : "bg-yellow-100 text-yellow-700"
                                                         }`}
                                                 >
                                                     {application.status || "Pending"}

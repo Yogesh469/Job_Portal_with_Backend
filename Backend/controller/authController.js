@@ -44,7 +44,7 @@ export const registerUser = async (req, res) => {
             message: "The user is created successfully",
             success: true,
             user: {
-                id: newUser._id,
+                _id: newUser._id,
                 name: newUser.name,
                 email: newUser.email
             }
@@ -161,7 +161,7 @@ export const updateProfile = async (req, res) => {
             success: true,
             message: "Profile updated successfully",
             user: {
-                id: user._id,
+                _id: user._id,
                 name: user.name,
                 email: user.email,
                 phone: user.phone,

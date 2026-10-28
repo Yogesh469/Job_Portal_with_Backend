@@ -11,7 +11,11 @@ const Application = () => {
 
     const loggedInUser = JSON.parse(
         localStorage.getItem("loggedInUser")
+
     );
+
+    console.log("Logged-in user:", loggedInUser);
+    console.log("User ID:", loggedInUser?._id);
 
     const validationSchema = Yup.object({
         name: Yup.string()
@@ -65,7 +69,7 @@ const Application = () => {
                     onSubmit={async (values, { setSubmitting }) => {
                         try {
                             const res = await axios.put(
-                                `http://localhost:3000/api3/updateprofile/${loggedInUser.id}`,
+                                `http://localhost:3000/api3/updateprofile/${loggedInUser._id}`,
                                 {
                                     ...values,
                                     skills: values.skills
@@ -81,7 +85,7 @@ const Application = () => {
                             const applicationRes = await axios.post(
                                 "http://localhost:3000/api4/application",
                                 {
-                                    applicant: loggedInUser.id,
+                                    applicant: loggedInUser._id,
                                     job: id
                                 }
                             );
