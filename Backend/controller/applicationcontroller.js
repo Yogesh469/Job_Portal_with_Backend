@@ -59,3 +59,66 @@ export const getApplications = async (req, res) => {
         });
     }
 };
+
+
+
+export const updateApplicationStatus = async (req, res) => {
+    try {
+        const { status } = req.body;
+        const { id } = req.params
+
+        if (!["Pending", "Shortlisted", "Rejected"].includes(status)) {
+            res.status(400).json({
+                success: false,
+                message: "Invalid application status"
+            });
+        } else {
+            const application = await Application.findByIdAndUpdate(
+                id,
+                { status },
+                { new: true, runValidators: true }
+            );
+
+            if (!application) {
+                res.status(404).json({
+                    success: false,
+                    message: "Application not found"
+                });
+            } else {
+                res.status(200).json({
+                    success: true,
+                    message: "Application status updated successfully",
+                    application
+                });
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to update application status"
+        });
+    }
+};
+
+export const getUserApplications = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const applications = await Application.find({
+            applicant: id
+        }).populate("job", "title company");
+
+        res.status(200).json({
+            success: true,
+            applications
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch your applications"
+        });
+    }
+};
+
